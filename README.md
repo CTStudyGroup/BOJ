@@ -70,41 +70,45 @@ branch 이름에 한글이 들어가면 문제가 생겨서 반드시 ⭐본인 
 ex) Hyolim.py  
 
 ## 🔹 Directory 구조
+```
 └── 📂BFS  
-&nbsp;&nbsp;&nbsp;&nbsp;├── 📂문제_이름  
-&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├── 💾홍길동.py  
-&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├── 💾...  
-&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;└── 💾홍길동.py  
-&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;└── README.md  
-&nbsp;&nbsp;&nbsp;&nbsp;├── 📂...  
-&nbsp;&nbsp;&nbsp;&nbsp;└── 📂문제_이름  
+    ├── 📂문제_이름  
+    │   ├── 💾홍길동.py  
+    │   ├── 💾...  
+    │   └── 💾홍길동.py  
+    │   └── README.md  
+    ├── 📂...  
+    └── 📂문제_이름
+
 └── 📂BinarySearch  
-&nbsp;&nbsp;&nbsp;&nbsp;├── 📂문제_이름  
-&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├── 💾홍길동.py  
-&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├── 💾...  
-&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;└── 💾홍길동.py  
-&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;└── README.md  
-&nbsp;&nbsp;&nbsp;&nbsp;├── 📂...  
-&nbsp;&nbsp;&nbsp;&nbsp;└── 📂문제_이름  
+    ├── 📂문제_이름  
+    │   ├── 💾홍길동.py  
+    │   ├── 💾...  
+    │   └── 💾홍길동.py  
+    │   └── README.md  
+    ├── 📂...  
+    └── 📂문제_이름
+ 
 └── 📂BruteForce  
-&nbsp;&nbsp;&nbsp;&nbsp;├── 📂문제_이름  
-&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├── 💾홍길동.py  
-&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├── 💾...  
-&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;└── 💾홍길동.py  
-&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;└── README.md  
-&nbsp;&nbsp;&nbsp;&nbsp;├── 📂...  
-&nbsp;&nbsp;&nbsp;&nbsp;└── 📂문제_이름  
+    ├── 📂문제_이름  
+    │   ├── 💾홍길동.py  
+    │   ├── 💾...  
+    │   └── 💾홍길동.py  
+    │   └── README.md  
+    ├── 📂...  
+    └── 📂문제_이름
+ 
 └── 📂Combination  
-&nbsp;&nbsp;&nbsp;&nbsp;├── 📂문제_이름  
-&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├── 💾홍길동.py  
-&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├── 💾...  
-&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;└── 💾홍길동.py  
-&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;└── README.md  
-&nbsp;&nbsp;&nbsp;&nbsp;├── 📂...  
-&nbsp;&nbsp;&nbsp;&nbsp;└── 📂문제_이름  
+    ├── 📂문제_이름  
+    │   ├── 💾홍길동.py  
+    │   ├── 💾...  
+    │   └── 💾홍길동.py  
+    │   └── README.md  
+    ├── 📂...  
+    └── 📂문제_이름
+
 └── ...
-
-
+```
 
 ## 🔸 참여자
 * 김은진 : https://github.com/Eunjin3395

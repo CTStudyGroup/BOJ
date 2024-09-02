@@ -1,8 +1,8 @@
 ---
 name: ADD
 about: "\b코딩테스트 문제를 추가하는 템플릿입니다."
-title: '알고리즘 유형 : [BOJ 문제번호] 문제 제목/티어랭크'
-labels: ''
+title: '알고리즘 유형 : [BOJ 문제번호] 문제 제목 / 티어랭크'
+labels: Add
 assignees: ''
 
 ---

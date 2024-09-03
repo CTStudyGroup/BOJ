@@ -1,4 +1,3 @@
-# Ignore all files starting with "input"
 input*
 
 *.idea

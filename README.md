@@ -10,9 +10,9 @@
 
 ## 🔸 참여자
 
-| <img src="https://avatars.githubusercontent.com/u/114724403?v=4" width="150" height="150"/> | <img src="https://avatars.githubusercontent.com/u/91868155?v=4" width="150" height="150"/> | <img src="https://avatars.githubusercontent.com/u/136284855?v=4" width="150" height="150"/> |
-| :-----------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
-|                   김은진<br/>[@Eunjin3395](https://github.com/Eunjin3395)                   |                    이효림<br/>[@rimi3226](https://github.com/rimi3226)                     |                       장현지<br/>[@hzee97](https://github.com/hzee97)                       |
+| <img src="https://avatars.githubusercontent.com/u/114724403?v=4" width="150" height="150"/> | <img src="https://avatars.githubusercontent.com/u/136284855?v=4" width="150" height="150"/> | <img src="https://avatars.githubusercontent.com/u/91868155?v=4" width="150" height="150"/> |
+| :-----------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------: |
+|                 [Eunjin3395](https://github.com/Eunjin3395) <br/>24.09.02 ~                 |                     [hzee97](https://github.com/hzee97)<br/> 24.09.02 ~                     |                 [rimi3226](https://github.com/rimi3226)<br/>24.09.02~10.02                 |
 
 <br/>
 

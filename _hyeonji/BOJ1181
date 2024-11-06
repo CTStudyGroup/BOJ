@@ -1,0 +1,17 @@
+## 백준 1181 단어 정렬
+# keypoint : 정렬
+
+import sys
+input=sys.stdin.readline
+
+n=int(input())
+
+alpha=[]
+for i in range(n):
+    alpha.append(input().rstrip())
+
+alpha=list(set(alpha))
+alpha.sort(key=lambda x:(len(x),x))
+
+for i in alpha:
+    print(i)

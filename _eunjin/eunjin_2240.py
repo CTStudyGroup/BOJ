@@ -36,15 +36,13 @@ for y in range(2, T+1):
                 if z == 0:
                     dp[y][x][z] = dp[y-1][0][0] + drop[y][0]
                 else:
-                    dp[y][x][z] = max(dp[y-1][0][z], dp[y-1]
-                                      [1][z-1]) + drop[y][0]
+                    dp[y][x][z] = max(dp[y-1][0][z], dp[y-1][1][z-1]) + drop[y][0]
 
             if x == 1:
                 if z == 0:
                     dp[y][x][z] = dp[y-1][1][0] + drop[y][1]
                 else:
-                    dp[y][x][z] = max(dp[y-1][1][z], dp[y-1]
-                                      [0][z-1]) + drop[y][1]
+                    dp[y][x][z] = max(dp[y-1][1][z], dp[y-1][0][z-1]) + drop[y][1]
 
 
 # for y in range(T+1):

@@ -60,7 +60,7 @@ def goNext(i, ny, nx):  # i번째 말을 (ny,nx) 좌표로 이동
 
 
 t = 0
-for t in range(1001):
+for t in range(1, 1001):
     for i in range(K):
         # 말의 y좌표, x좌표, 방향
         y, x, d = chess[i]
@@ -96,7 +96,7 @@ for t in range(1001):
     #         print(position[y][x], end=" ")
     #     print()
     if max_pos >= 4:
-        print(t+1)
+        print(t)
         exit()
 
 print(-1)

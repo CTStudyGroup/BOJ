@@ -41,8 +41,6 @@ def nextIsBlue(i):  # i번째 말의 다음 칸이 파란색인지 여부 반환
 
 def goNext(i, ny, nx):  # i번째 말을 (ny,nx) 좌표로 이동
     global matrix, chess, position, max_pos
-    if nx >= N or nx < 0 or ny >= N or ny < 0:
-        return
 
     y, x = chess[i][0], chess[i][1]
     mals = position[y][x]  # 현재 좌표에 있는 모든 말 찾기

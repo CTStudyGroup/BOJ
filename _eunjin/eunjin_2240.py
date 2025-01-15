@@ -31,7 +31,7 @@ dp[1][1][1] = drop[1][1]
 
 for y in range(2, T+1):
     for x in range(2):
-        for z in range(min(y, W+1)):
+        for z in range(W+1):
             if x == 0:
                 if z == 0:
                     dp[y][x][z] = dp[y-1][0][0] + drop[y][0]

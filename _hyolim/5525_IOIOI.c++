@@ -3,67 +3,36 @@
 
 using namespace std;
 
-string s;
-
+// IOI 개수 세기 개수가 n이 되면 ++
 int n;
-int lens;
+string s;
+int m;
 int ans=0;
 
 void input(){
-    cin>>n;
-    cin>>lens;
-    cin>>s;
-}
-
-// 전체 다 확인하는 함수
-bool checkIOI(int idx){
-    int i=0;
-
-    while(i<n){
-        if(s[idx+2*i]!='I'||s[idx+2*i+1]!='O') {
-            return false;
-        }
-        i++;
-    }
-
-    if(s[idx+(2*n)]!='I') {
-        return false;
-    }
-    return true;
-}
-
-// 양쪽만 확인하는 함수
-bool checkS(int idx){
-    // 양쪽 맞는지 확인
-    if(s[idx+2*n-1]=='O' && s[idx+2*n]=='I'){
-        return true;
-    } 
-    return false;
+    cin>>n>>m>>s;
 }
 
 void solve(){
-    int i=0;
-    while(i<lens-2*n){
-        if(checkIOI(i)) {
-            // cout<<"i: "<<i<<"\n";
-            i+=(2*n-1);
-            ans++;
-            // 하나 길게 맞는거 확인했으니 이제 양쪽만 확인하기
-            while(checkS(i)){
-                // cout<<i;
-                i+=2;
+    int i=-1;
+    int k=0;
+    while(i<=m){
+        i++;
+        if(s[i]=='O') continue;
+        if(s[i+1]=='O' && s[i+2]=='I'){
+            k++;
+            if(k==n){
                 ans++;
+                k--;
             }
-        }else{
             i++;
-
+        }else{
+            k=0;
         }
     }
 }
 
 int main(){
-    cin.tie(0);
-    ios_base::sync_with_stdio(0);
     input();
     solve();
     cout<<ans;

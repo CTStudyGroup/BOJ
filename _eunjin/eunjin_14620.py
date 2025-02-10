@@ -43,29 +43,6 @@ def visit(y, x):
         visited[ny][nx] = True
 
 
-flower_cnt = 0
-total_cost = 0
-
-while(flower_cnt < 3):
-    min_cost = 1001
-    min_y, min_x = -1, -1
-    for y in range(1, N-1):
-        for x in range(1, N-1):
-            if isVisited(y, x):
-                continue
-
-            cost = get_cost(y, x)
-            if cost < min_cost:
-                min_y, min_x = y, x
-                min_cost = cost
-
-    visit(min_y, min_x)
-    flower_cnt += 1
-    total_cost += min_cost
-
-print(total_cost)
-print(visited)
-
 # 좌표 3개 선택하는 모든 조합
 coords = [(i, j) for i in range(1, N-1) for j in range(1, N-1)]
 combs = list(combinations(coords, 3))

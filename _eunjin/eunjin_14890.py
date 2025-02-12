@@ -53,9 +53,6 @@ for y in range(N):
                 slope[y][i] = 1
     if possible:
         answer += 1
-    else:  # slope 초기화
-        for j in range(N):
-            slope[y][j] = 0
 
 
 slope = [[0]*N for _ in range(N)]
@@ -95,8 +92,5 @@ for x in range(N):
                 slope[i][x] = 1
     if possible:
         answer += 1
-    else:
-        for j in range(N):
-            slope[j][x] = 0
 
 print(answer)

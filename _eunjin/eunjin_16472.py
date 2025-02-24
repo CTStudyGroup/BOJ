@@ -8,21 +8,19 @@ string = input().strip()
 left = 0
 right = 0
 mx = 1
-x = 1
-alphabet = [string[0]]
+_dict = {}
+_dict[string[0]] = 1
 
 while right < len(string)-1:
     right += 1
-    if string[right] in alphabet:
-        x += 1
-        mx = max(mx, x)
-        alphabet.append(string[right])
-    else:
-        alphabet.append(string[right])
-        while len(alphabet) > N:
-            alphabet.remove(string[left])
-            left += 1
-        x = right-left+1
-    # print("left:", left, ", right:", right, "x:", x, ", mx:", mx)
+    _dict[string[right]] = _dict.get(string[right], 0) + 1  # 새 문자 추가
+
+    while len(_dict) > N:
+        _dict[string[left]] -= 1
+        if _dict[string[left]] == 0:
+            del _dict[string[left]]
+        left += 1
+
+    mx = max(mx, right-left+1)
 
 print(mx)

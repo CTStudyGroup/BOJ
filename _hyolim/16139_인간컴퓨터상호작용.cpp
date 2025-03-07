@@ -1,46 +1,47 @@
 #include <iostream>
 #include <string>
-#include <vector>
 
 using namespace std;
 
 string S;
 int strl;
-vector<int> str[26];
 int t;
+int arr[26][200001]={0,};
 
-void printStr(){
+void input(){
+	cin>>S;
+	strl=S.length();
+
+	for(int i=1;i<=strl;i++){
+		for(int j=0;j<26;j++){
+			arr[j][i]+=arr[j][i-1];
+		}
+
+		arr[S[i-1]-'a'][i]++;
+	}
+}
+
+void  printarr(){
 	for(int i=0;i<26;i++){
 		cout<<(char)('a'+i)<<": ";
-		for(auto e: str[i]){
-			cout<<e<<" ";
+		for(int j=1;j<=strl;j++){
+			cout<<arr[i][j]<<" ";
 		}
 		cout<<"\n";
 	}
 }
 
-void input(){
-	cin>>S;
-	strl=S.length();
-	for(int i=0;i<strl;i++){
-		str[S[i]-'a'].push_back(i);
-	}
-}
-
 void solve(){
+	// printarr();
 	cin>>t;
 
 	char a;
 	int l,r;
 	int cnt=0;
+
 	while(t--){
 		cin>>a>>l>>r;
-		cnt=0;
-		for(auto e:str[a-'a']){
-			if(l<=e&&e<=r) cnt++;
-			if(e>r) break;
-		}
-		cout<<cnt<<"\n";
+		cout<<arr[a-'a'][r+1]-arr[a-'a'][l]<<"\n";
 	}
 }
 

@@ -63,7 +63,7 @@ class GAME:
             
             # get next direction
             A, B = self.dice[1], self.board[x][y]
-            print(self.d,self.dice)
+
             if A != B:
                 self.getDirection(A, B)
 

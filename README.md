@@ -6,9 +6,9 @@
 
 ## 🔸 참여자
 
-| <img src="https://avatars.githubusercontent.com/u/114724403?v=4" width="150" height="150"/> | <img src="https://avatars.githubusercontent.com/u/91868155?v=4" width="150" height="150"/> | <img src="https://avatars.githubusercontent.com/u/136284855?v=4" width="150" height="150"/> |
-| :-----------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
-|                 [Eunjin3395](https://github.com/Eunjin3395) <br/>24.09.02 ~                 |                  [rimi3226](https://github.com/rimi3226)<br/> 24.09.02 ~                   |               [hzee97](https://github.com/hzee97imi3226)<br/>24.09.02 ~ 24.12               |
+| ![](https://avatars.githubusercontent.com/u/114724403?v=4) | ![](https://avatars.githubusercontent.com/u/91868155?v=4) | ![](https://avatars.githubusercontent.com/u/86961575?v=4) | ![](https://avatars.githubusercontent.com/u/112928885?v=4) |   ![](https://avatars.githubusercontent.com/u/86835751?v=4)   |   ![](https://avatars.githubusercontent.com/u/136284855?v=4)    |
+| :--------------------------------------------------------: | :-------------------------------------------------------: | :-------------------------------------------------------: | :--------------------------------------------------------: | :-----------------------------------------------------------: | :-------------------------------------------------------------: |
+| [Eunjin3395](https://github.com/Eunjin3395)<br/>24.09.02 ~ |  [rimi3226](https://github.com/rimi3226)<br/>24.09.02 ~   |    [KII1ua](https://github.com/KII1ua)<br/>25.04.01 ~     |      [kslvy](https://github.com/kslvy)<br/>25.04.01 ~      | [sgzzong](https://github.com/sgzzong)<br/>25.04.01 ~ 25.04.09 | [hzee97](https://github.com/hzee97imi3226)<br/>24.09.02 ~ 24.12 |
 
 <br/>
 

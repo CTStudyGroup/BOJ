@@ -1,23 +1,21 @@
-N = int(input())
+n = int(input())
 arr = list(map(int, input().split()))
-X = int(input())
+x = int(input())
 
-# 딕셔너리로 각 숫자의 개수 세기
-_dict = {}
+arr.sort()
+left = 0
+right = n - 1
+count = 0
 
-for elem in arr:
-    if elem in _dict:
-        _dict[elem] += 1
+while left < right:
+    total = arr[left] + arr[right]
+    if total == x:
+        count += 1
+        left += 1
+        right -= 1
+    elif total < x:
+        left += 1
     else:
-        _dict[elem] = 1
+        right -= 1
 
-answer = 0
-for key in _dict.keys():
-    if X - key in _dict:
-        if 2 * key == X:
-            if _dict[X - key] > 1:
-                answer += 1
-        else:
-            answer += 1
-
-print(answer // 2)
+print(count)

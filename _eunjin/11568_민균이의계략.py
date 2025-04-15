@@ -1,15 +1,16 @@
-# 가장 긴 증가하는 부분 수열 문제 = dp LIS
-import sys
-input = sys.stdin.readline
+import bisect
 
 N = int(input())
 arr = list(map(int, input().split()))
 
-# dp[x]: arr[x]를 마지막 원소로 하는 LIS 길이
-dp = [1] * N
+LIS = []
 
-for i in range(N):
-    for j in range(i):
-        if arr[i] > arr[j]:
-            dp[i] = max(dp[i], dp[j] + 1)
-print(max(dp))
+for num in arr:
+    idx = bisect.bisect_left(LIS, num)  # num이 들어갈 위치 (lower bound)
+    if idx == len(LIS):
+        LIS.append(num)  # num이 가장 크면 LIS 확장
+    else:
+        LIS[idx] = num   # 아니면 적절한 위치에 덮어쓰기 (더 작은 값 유지)
+
+# print(LIS)
+print(len(LIS))

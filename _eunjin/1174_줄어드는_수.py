@@ -1,20 +1,26 @@
-from itertools import combinations
-
 N = int(input())
 
 total = []
-for n in range(1, 11):
-    for comb in combinations(range(0, 10), n):
-        temp = 0
-        for i in range(len(comb)):
-            temp += comb[i] * 10**i
-        total.append(temp)
-        # print(temp)
+
+def backtracking(n):
+    temp = 0
+    for i in range(len(arr)):
+        temp += arr[i] * 10**i
+    total.append(temp)
+
+    for i in range(n + 1, 10):
+        arr.append(i)
+        backtracking(i)
+        arr.pop()
+
+for i in range(10):
+    arr = [i]
+    backtracking(i)
 
 total.sort()
 
 if N > len(total):
     print(-1)
 else:
-    arr = total[N - 1]
-    print(arr)
+    print(total[N - 1])
+

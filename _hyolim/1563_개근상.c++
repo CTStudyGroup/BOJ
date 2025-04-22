@@ -2,28 +2,32 @@
 
 using namespace std;
 
-// 0 : 출석, 1 : 지각, 2 : 결석
 int n;
-long cnt=0;
-
-void solve(int depth,int late,int absence){
-	if(late>=2) return; // 지각 두 번 이상
-	if(absence>=3) return; // 결석 3번 연속
-
-	if(depth==n){
-		cnt=(cnt+1)%1000000;
-		return;
-	}
-
-
-	solve(depth+1,late,0); //출석
-	solve(depth+1,late,absence+1); //결석
-	solve(depth+1,late+1,0); //지각
-}
+int divval=1000000;
+long dp[1001][2][3]={0,}; // 날짜, 지각, 결석
 
 int main(){
 	cin>>n;
-	solve(0,0,0);
-	cout<<cnt;
+	dp[1][0][0]=dp[1][1][0]=dp[1][0][1]=1;
 
+	for(int i=2;i<=n;i++){
+		// 0번 지각 0번 결석
+		dp[i][0][0]=(dp[i-1][0][0]+dp[i-1][0][1]+dp[i-1][0][2])%divval;
+		
+		// 0번 지각 1번 결석
+		dp[i][0][1]=(dp[i-1][0][0])%divval;
+
+		// 0번 지각 2번 결석
+		dp[i][0][2]=dp[i-1][0][1]%divval;
+
+		// 1번 지각 0번 결석
+		dp[i][1][0]=(dp[i-1][0][0]+dp[i-1][0][1]+dp[i-1][0][2]+dp[i-1][1][0]+dp[i-1][1][1]+dp[i-1][1][2])%divval;
+
+		// 1번 지각 1번 결석
+		dp[i][1][1]=dp[i-1][1][0]%divval;
+
+		// 1번 지각 2번 결석
+		dp[i][1][2]=dp[i-1][1][1]%divval;
+	}
+	cout<<(dp[n][0][0]+dp[n][0][1]+dp[n][0][2]+dp[n][1][0]+dp[n][1][1]+dp[n][1][2])%divval;
 }

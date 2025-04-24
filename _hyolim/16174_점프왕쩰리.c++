@@ -3,6 +3,7 @@
 using namespace std;
 
 int map[65][65]={0,};
+bool dp[65][65];
 int n;
 
 void input(){
@@ -14,22 +15,22 @@ void input(){
 	}
 }
 
-void solve(int y,int x){
-	if(y>=n||x>=n){ // 범위 밖으로 나갈 경우
-		return;
+void solve(){
+	dp[0][0]=1;
+
+	for(int i=0;i<n;i++){
+		for(int j=0;j<n;j++){
+			if(!dp[i][j]) continue; // 못 갈 경우 x
+
+			dp[i+map[i][j]][j]=1;
+			dp[i][j+map[i][j]]=1;
+		}
 	}
 
-	if(map[y][x]==-1){ // 승리했을 경우
-		cout<<"HaruHaru";
-		exit(0);
-	}
-
-
-	solve(y+map[y][x],x);
-	solve(y,x+map[y][x]);
-}
+	if(dp[n-1][n-1]) cout<<"HaruHaru";
+	else cout<<"Hing";
+}	
 int main(){
 	input();
-	solve(0,0);
-	cout<<"Hing";
+	solve();
 }

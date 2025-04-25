@@ -8,7 +8,7 @@ INF = 10**9
 # 13 mod -4 = 1
 # -13 mod -4 = -1
 
-def div(n1, n2):  # valid, 결과
+def div(n2, n1):  # valid, 결과
     if n2 == 0:
         return False, 0
     if n1 == 0:
@@ -20,7 +20,7 @@ def div(n1, n2):  # valid, 결과
         return True, abs(n1) // abs(n2)
 
 
-def mod(n1, n2):  # valid, 결과
+def mod(n2, n1):  # valid, 결과
     if n2 == 0:
         return False, 0
     if n1 == 0:
@@ -75,9 +75,9 @@ def execute(st):
         stack.append(n1 + n2)
         return True
     elif cmd == "SUB":
-        if abs(n1 - n2) > INF:
+        if abs(n2 - n1) > INF:
             return False
-        stack.append(n1 - n2)
+        stack.append(n2 - n1)
         return True
     elif cmd == "MUL":
         if abs(n1 * n2) > INF:

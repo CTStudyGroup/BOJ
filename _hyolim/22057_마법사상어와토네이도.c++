@@ -1,95 +1,91 @@
-#include<iostream>
+#include <iostream>
+#include <vector>
+int N;
+
 using namespace std;
+vector<vector<int> > board;
 
-struct point_t{
-    int y,x;
+//4방향
+int dy[] = { 0,1,0,-1 };
+int dx[] = { -1, 0,1,0 };
+
+// 움직이는 모래의 정도
+double p[9] = { 0.05, 0.1, 0.1, 0.02, 0.02, 0.07, 0.07, 0.01, 0.01 };
+
+int m_dy[4][10] = {
+	{0,-1,1, -2,2,-1,1,-1,1,0},
+	{2,1,1,0,0,0,0,-1,-1,1},
+	{0,-1,1, -2,2,-1,1,-1,1,0},
+	{-2,-1,-1,0,0,0,0,1,1,-1}
 };
-
-int n,ans;
-int board[500][500]={0,};
-int dx[4]={0,1,0,-1};
-int dy[4]={-1,0,1,0};
-
-int percent[9]={1,1,7,7,10,10,2,2,5};
-
-int xdx[4][10]={
-    {-1,1,-1,1,-1,1,-2,2,0,0},
-    {-1,-1,0,0,1,1,0,0,2,1},
-    {-1,1,-1,1,-1,1,-2,2,0,0},
-    {1,1,0,0,-1,-1,0,0,-2,-1}
+int m_dx[4][10] = {
+	{-2,-1,-1,0,0,0,0,1,1,-1},
+	{0,-1,1, -2,2,-1,1,-1,1,0},
+	{2,1,1,0,0,0,0,-1,-1,1},
+	{0,-1,1, -2,2,-1,1,-1,1,0}
 };
-int ydy[4][10]={
-    {0,0,1,1,2,2,1,1,3,2},
-    {-1,1,-1,1,-1,1,-2,2,0,0},
-    {0,0,-1,-1,-2,-2,-1,-1,-3,-2},
-    {-1,1,-1,1,-1,1,-2,2,0,0}
-};
+int result = 0;
+int cnt = 0;
 
-void input(){
-    cin>>n;
-    for(int i=0;i<n;i++)
-        for(int j=0;j<n;j++)
-            cin>>board[i][j];
+void check() {
+	int y = N / 2, x = N / 2; // 배열의 중간 좌표
+	int a;
+	int dist = 1;
+	int d = 0; 
+	int cnt = 0; // 두 번 이동 확인용 count 변수
+	while (1) {
+		cnt++;
+
+		//dist만큼 d방향으로 이동
+		for (int m = 0; m < dist; m++) { 
+			int ny = y + dy[d];  // d 방향으로 이동
+			int nx = x + dx[d];  // d 방향으로 이동
+			y = ny;
+			x = nx;
+			a = board[ny][nx]; // 이동한 모래 
+			for (int k = 0; k < 9; k++) {
+				int m_ny = ny + m_dy[d][k]; //흩날리는 모래 y 좌표
+				int m_nx = nx + m_dx[d][k]; //흩날리는 모래 x 좌표
+
+				int sand = (int)(board[ny][nx] * p[k]); //흩날리는 모래 양
+				a -= sand; // 이동한 모래에서 흩날리는 모래를 빼줌
+				if (m_ny < 0 || m_ny >= N || m_nx < 0 || m_nx >= N)  // 격자 밖으로 이동한 경우 result에 흩날린 모래를 추가
+					result += sand; 
+				else   // 격자 안인 경우 해당 좌표에 흩날리는 모래 양 추가
+					board[m_ny][m_nx] += sand; 
+				
+			}
+			//나머지 모래 이동
+			int m_ny = ny + m_dy[d][9]; 
+			int m_nx = nx + m_dx[d][9];
+			if (m_ny < 0 || m_ny >= N || m_nx < 0 || m_nx >= N) {
+				result += a;
+			}
+			else
+				board[m_ny][m_nx] += a;
+
+			board[ny][nx] = 0; // 이동 후 모래 = 0으로 지정
+			if (ny == 0 && nx == 0) //이동 후 좌표가 (0, 0)인 경우 종료
+				return;
+		}
+		if (cnt == 2) {  
+			//두 번 이동한 경우 dist+=1
+			dist++;
+			cnt = 0;
+		}
+		d = (d + 1) % 4; // 이동 방향을 바꿈
+	}
 }
 
-void spread_sand(int y,int x,int dir){
-    int ny=y+dy[dir];
-    int nx=x+dx[dir];
-    if(board[ny][nx]==0) return;
-
-    int sand=board[ny][nx];
-    int temp=sand;
-
-    for(int i=0;i<9;i++){
-        int sy=y+ydy[dir][i];
-        int sx=x+xdx[dir][i];
-        int amount=(temp*percent[i])/100;
-
-        if(sy<0||sx<0||sy>=n||sx>=n)
-            ans+=amount;
-        else
-            board[sy][sx]+=amount;
-
-        sand-=amount;
-    }
-
-    int alpha_y=y+ydy[dir][9];
-    int alpha_x=x+xdx[dir][9];
-
-    if(alpha_y<0||alpha_x<0||alpha_y>=n||alpha_x>=n)
-        ans+=sand;
-    else
-        board[alpha_y][alpha_x]+=sand;
-
-    board[ny][nx]=0;
-}
-
-void solve(){
-    int y=n/2;
-    int x=n/2;
-    int dir=0;
-    int move_len=1;
-
-    while(1){
-        for(int k=0;k<2;k++){
-            for(int i=0;i<move_len;i++){
-                spread_sand(y,x,dir);
-                y+=dy[dir];
-                x+=dx[dir];
-
-                if(y==0&&x==0){
-                    cout<<ans;
-                    return;
-                }
-            }
-            dir=(dir+1)%4;
-        }
-        move_len++;
-    }
-}
-
-int main() {
-    input();
-    solve();
-    return 0;
+int main()
+{
+	cin >> N;
+	board = vector<vector<int> >(N, vector<int>(N, 0));
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < N; j++) {
+			cin >> board[i][j];
+		}
+	}
+	check();
+	cout << result;
 }

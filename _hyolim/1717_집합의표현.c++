@@ -1,41 +1,48 @@
-#include <iostream>
+#include<iostream>
+#include<vector>
 
 using namespace std;
+int n, m;
+int parent[1000001];
 
-int n,m;
-int arr[1000010]={0,};
-
-
-
-void funca(int a,int b){
-	if(a<=b){
-		arr[b]=arr[a];
-	}else{
-		arr[a]=arr[b];
-	}
+int getParent(int x) {
+    if (parent[x] == x) return x;
+    return parent[x] = getParent(parent[x]);
+}
+void unionParent(int a, int b) {
+    a = getParent(a);
+    b = getParent(b);
+    if (a > b) parent[a] = b;
+    else parent[b] = a;
+}
+void findParent(int a, int b) {
+    a = getParent(a);
+    b = getParent(b);
+    if (a == b) cout << "YES\n";
+    else cout << "NO\n";
 }
 
-void funcb(int a,int b){
-	if(arr[a]==arr[b]) cout<<"YES\n";
-	else cout<<"NO\n";
 
-}
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
 
-int main(){
-	cin>>n>>m;
-	for (int i = 0; i <= n; ++i)
-	{
-		arr[i]=i;
-	}
+    cin >> n >> m;
+    for (int i = 1; i <= n; i++) {
+        parent[i] = i;
+    }
+    for (int i = 0; i < m; i++) {
+        int o, a, b;
+        cin >> o >> a >> b;
+        if (!o) {// union연산
+            unionParent(a, b);
+        }
+        else { //find연산
+            findParent(a, b);
+        }
 
-	for (int i = 0; i < m; ++i)
-	{
-		int t,a,b; cin>>t>>a>>b;
-		if (t==0)
-		{
-			funca(a,b);
-		}else{
-			funcb(a,b);
-		}
-	}
+    }
+
+    return 0;
 }

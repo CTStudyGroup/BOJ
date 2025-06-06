@@ -6,7 +6,6 @@ int n,s;
 int arr[50]={0,};
 
 void input(){
-	// 내림차순 버블 정렬 구현
 	cin>>n;
 	for (int i = 0; i < n; ++i)
 	{

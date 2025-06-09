@@ -87,7 +87,7 @@ jobs:
 
           # 해당 체크박스와 제출 체크박스 모두 업데이트
           SUBMIT_FIELD="제출$FIELD_NAME"
-          echo "대상 제출 필드: $SUBMIT_FIELD"
+          echo "📦 대상 제출 필드: $SUBMIT_FIELD"
 
           curl -s -o /dev/null -w "%{http_code}" -X PATCH "https://api.notion.com/v1/pages/$PAGE_ID" \
             -H "Authorization: Bearer $NOTION_API_KEY" \

@@ -7,62 +7,64 @@ on:
 jobs:
   update-notion-checkbox:
     runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
-      NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
-      LAMBDA_ENDPOINT: https://p7vk9p47d0.execute-api.ap-northeast-2.amazonaws.com/api/save
-
     steps:
-      - name: 1️⃣ PR 정보 추출
+      - name: Check PR title and body, then update author-specific checkbox
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
         run: |
+          echo "🔍 시작: PR 제목과 본문 확인"
+
           PR_TITLE=$(jq -r .pull_request.title "$GITHUB_EVENT_PATH")
           PR_BODY=$(jq -r .pull_request.body "$GITHUB_EVENT_PATH")
           PR_AUTHOR=$(jq -r .pull_request.user.login "$GITHUB_EVENT_PATH")
 
-          echo "PR_TITLE=$PR_TITLE" >> $GITHUB_ENV
-          echo "PR_BODY=$PR_BODY" >> $GITHUB_ENV
-          echo "PR_AUTHOR=$PR_AUTHOR" >> $GITHUB_ENV
+          echo "📌 PR Title: $PR_TITLE"
+          echo "👤 작성자: $PR_AUTHOR"
 
-      - name: 2️⃣ 이모지 감지 및 체크박스 상태 결정
-        run: |
+          # ✅ 및 ❌ 이모지 감지
           HAS_CHECK=$(echo "$PR_BODY" | grep -q "✅" && echo "yes" || echo "no")
           HAS_CROSS=$(echo "$PR_BODY" | grep -q "❌" && echo "yes" || echo "no")
 
           if [[ "$HAS_CHECK" == "yes" && "$HAS_CROSS" == "yes" ]]; then
             CHECKBOX_VALUE=false
+            echo "⚠️ 둘 다 포함 → false"
           elif [[ "$HAS_CROSS" == "yes" ]]; then
             CHECKBOX_VALUE=false
+            echo "❌ 포함 → false"
           elif [[ "$HAS_CHECK" == "yes" ]]; then
             CHECKBOX_VALUE=true
+            echo "✅ 포함 → true"
           else
             echo "⚠️ 이모지가 없어 스킵합니다."
             exit 0
           fi
 
+          # 작성자 → 체크박스 필드 매핑
           case "$PR_AUTHOR" in
             "Eunjin3395") FIELD_NAME="은진" ;;
             "rimi3226") FIELD_NAME="효림" ;;
             "KII1ua") FIELD_NAME="성윤" ;;
             "kslvy") FIELD_NAME="경은" ;;
-            *) echo "❌ 알 수 없는 작성자: $PR_AUTHOR"; exit 1 ;;
+            *)
+              echo "❌ 알 수 없는 작성자: $PR_AUTHOR"
+              exit 1
+              ;;
           esac
 
-          echo "CHECKBOX_VALUE=$CHECKBOX_VALUE" >> $GITHUB_ENV
-          echo "FIELD_NAME=$FIELD_NAME" >> $GITHUB_ENV
-          echo "SUBMIT_FIELD=제출$FIELD_NAME" >> $GITHUB_ENV
+          echo "🧩 적용 대상 필드: $FIELD_NAME"
 
-      - name: 3️⃣ PR 제목에서 문제 번호 추출
-        run: |
+          # PR 제목에서 BOJ 문제 번호 추출
           PROBLEM_NO=$(echo "$PR_TITLE" | grep -oE '\[BOJ [0-9]+\]' | grep -oE '[0-9]+')
           if [ -z "$PROBLEM_NO" ]; then
-            echo "❌ 문제 번호 추출 실패"
+            echo "❌ PR 제목에서 문제 번호를 찾을 수 없습니다."
             exit 1
           fi
-          echo "PROBLEM_NO=$PROBLEM_NO" >> $GITHUB_ENV
 
-      - name: 4️⃣ Notion 페이지 ID 조회
-        run: |
+          echo "🔢 추출된 문제 번호: $PROBLEM_NO"
+
+          # Notion DB에서 문제 번호 필드 == 문제 번호인 페이지 검색
           PAGE_ID=$(curl -s -X POST "https://api.notion.com/v1/databases/$NOTION_DATABASE_ID/query" \
             -H "Authorization: Bearer $NOTION_API_KEY" \
             -H "Notion-Version: 2022-06-28" \
@@ -77,13 +79,16 @@ jobs:
             }' | jq -r '.results[0].id')
 
           if [ "$PAGE_ID" = "null" ] || [ -z "$PAGE_ID" ]; then
-            echo "❌ Notion에서 페이지 ID를 찾을 수 없습니다"
+            echo "❌ Notion에서 문제 번호 $PROBLEM_NO에 해당하는 페이지를 찾을 수 없습니다."
             exit 1
           fi
-          echo "PAGE_ID=$PAGE_ID" >> $GITHUB_ENV
 
-      - name: 5️⃣ Notion 체크박스 업데이트
-        run: |
+          echo "✅ 대상 Notion 페이지 ID 확인됨"
+
+          # 해당 체크박스와 제출 체크박스 모두 업데이트
+          SUBMIT_FIELD="제출$FIELD_NAME"
+          echo "📦 대상 제출 필드: $SUBMIT_FIELD"
+
           JSON_BODY=$(cat <<EOF
           {
             "properties": {
@@ -98,33 +103,27 @@ jobs:
           EOF
           )
 
+          # 👁 JSON 본문 출력
+          echo "📤 Notion PATCH 요청 본문:"
+          echo "$JSON_BODY"
+
+          # 🔁 PATCH 요청 전송
           curl -s -o /dev/null -w "%{http_code}" -X PATCH "https://api.notion.com/v1/pages/$PAGE_ID" \
             -H "Authorization: Bearer $NOTION_API_KEY" \
             -H "Notion-Version: 2022-06-28" \
             -H "Content-Type: application/json" \
             --data "$JSON_BODY"
 
-          echo "✅ Notion 업데이트 완료: $FIELD_NAME → $CHECKBOX_VALUE"
+          echo "🎉 Notion 업데이트 완료!!: $FIELD_NAME → $CHECKBOX_VALUE"
 
-      - name: 6️⃣ Lambda API 호출로 DynamoDB에 문제 기록
-        run: |
-          RESPONSE=$(curl -s -w "\n%{http_code}" -X POST "$LAMBDA_ENDPOINT" \
+          curl -X POST https://p7vk9p47d0.execute-api.ap-northeast-2.amazonaws.com/api/save \
             -H "Content-Type: application/json" \
             -d "$(cat <<EOF
-              {
+            {
               "prAuthor": "$PR_AUTHOR",
               "problemId": "$PROBLEM_NO"
-              }
-              EOF
-              )")
+            }
+            EOF
+            )"
 
-          BODY=$(echo "$RESPONSE" | sed '$d')
-          STATUS_CODE=$(echo "$RESPONSE" | tail -n1)
-
-          echo "📬 Lambda 응답 코드: $STATUS_CODE"
-          echo "📦 응답 본문: $BODY"
-
-          if [ "$STATUS_CODE" -ne 200 ]; then
-            echo "❌ Lambda 호출 실패"
-            exit 1
-          fi
+          echo "🎉 Lambda API 호출 완료!!: $PR_AUTHOR, $PROBLEM_NO"

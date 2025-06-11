@@ -116,14 +116,13 @@ jobs:
 
           echo "🎉 Notion 업데이트 완료!!: $FIELD_NAME → $CHECKBOX_VALUE"
 
-          curl -X POST https://p7vk9p47d0.execute-api.ap-northeast-2.amazonaws.com/api/save \
+          echo "🎯 Lambda API 호출 시작"
+
+          curl -s -o lambda_response.json -w "%{http_code}" -X POST https://p7vk9p47d0.execute-api.ap-northeast-2.amazonaws.com/api/save \
             -H "Content-Type: application/json" \
-            -d "$(cat <<EOF
-            {
-              "prAuthor": "$PR_AUTHOR",
-              "problemId": "$PROBLEM_NO"
-            }
-            EOF
-            )"
+            -d "{\"prAuthor\": \"$PR_AUTHOR\", \"problemId\": \"$PROBLEM_NO\"}"
+
+          echo "📬 Lambda 응답:"
+          cat lambda_response.json
 
           echo "🎉 Lambda API 호출 완료!!: $PR_AUTHOR, $PROBLEM_NO"

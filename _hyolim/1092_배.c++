@@ -1,64 +1,57 @@
 #include <iostream>
 #include <algorithm>
+#include <vector>
 
 using namespace std;
 
 int n,m;
-int crane[51]={0,};
-int box[10001]={0,};
-bool fin[10001]={0,};
+vector<int> crane;
+vector<int> box;
 
-bool isfin(){
-	for (int i = 0; i < m; ++i)
-	{
-		if(!fin[i]) return false;
-	}
-	return true;
-}
 
 void input(){
 	cin>>n;
 	for (int i = 0; i < n; ++i)
 	{
-		cin>>crane[i];
+		int temp; cin>>temp;
+		crane.push_back(temp);
 	}
 	cin>>m;
 	for (int i = 0; i < m; ++i)
 	{
-		cin>>box[i];
+		int temp; cin>>temp;
+		box.push_back(temp);
 	}
 }
 
 void solve(){
-	sort(crane,crane+n);
-	sort(box,box+m);
+	sort(crane.begin(),crane.end());
+	sort(box.begin(),box.end());
 
-	if(crane[n-1]<box[m-1]){
+	if(crane.back()<box.back()){
 		cout<<-1;
 		return;
 	}
 
 	int t=0;
-	while(true){
-		if(isfin()){
-			cout<<t;
-			return;
-		}
-		for(int i=n-1;i>=0;i--){
-			for(int j=m-1;j>=0;j--){
-				if(fin[j]) continue;
+	while(!box.empty()){
+		for(int i=crane.size()-1;i>=0;i--){
+			for(int j=box.size()-1;j>=0;j--){
 				if(crane[i]>=box[j]){
-					fin[j]=true;
+					box.erase(box.begin()+j);
 					break;
 				}
 			}
 		}
 		t++;
 	}
+	cout<<t;
 
 }
 
 int main(){
+	ios_base::sync_with_stdio(0);
+	cin.tie(0);
 	// 정렬 후 본인보다 작은 박스를 그리디처럼 없앤다.
 	input();
 	solve();

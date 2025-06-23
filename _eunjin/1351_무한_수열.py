@@ -1,20 +1,27 @@
-import math
-
 N, P, Q = map(int, input().split())
 
-# A0 = 1
-# A1 = A0 + A0 = 2
-# A2 = A1 + A0 = 3
-# A3 = A1 + A1 = 4
-# A4 = A2 + A1 = 5
-
 # dp
-A = [0] * (N + 1)
-A[0] = 1
+_dict = {}
+_dict[0] = 1
 
-for i in range(1, N + 1):
-    p = math.floor(i / P)
-    q = math.floor(i / Q)
-    A[i] = A[p] + A[q]
+def recursion(n):
+    if n == 0:
+        return 1
+    p = int(n / P)
+    q = int(n / Q)
 
-print(A[N])
+    if p in _dict:
+        Ap = _dict[p]
+    else:
+        Ap = recursion(p)
+        _dict[p] = Ap
+
+    if q in _dict:
+        Aq = _dict[q]
+    else:
+        Aq = recursion(q)
+        _dict[q] = Aq
+
+    return Ap + Aq
+
+print(recursion(N))

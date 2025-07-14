@@ -7,57 +7,61 @@ typedef long long ll;
 
 int dx[] = {0, 1, -1, 0,1, -1, -1, 1};
 int dy[] = {1, 0, 0, -1, -1, 1, -1, 1};
-int T;
-string s;
 
-void solve() {
-    string tmp = "";
+int N;
+int arr[1001];
+vector<int> v;
+unordered_map<int, int> um;
 
-    list<char> li(tmp.begin(), tmp.end());
+bool search(int target) {
+    int start = 0;
+    int end = v.size()-1;
 
-    auto idx = li.end();
+    while(start <= end) {
+        int mid = (start + end) / 2;
 
-    for(int i = 0; i < s.size(); i++) {
-        if(s[i] == '<') {
-            if(idx != li.begin()) {
-                idx--;
-            }
+        if(v[mid] == target) {
+            return true;
         }
-        else if(s[i] == '>') {
-            if(idx != li.end()) {
-                idx++;
-            }
-        }
-        else if(s[i] == '-') {
-            if(idx != li.begin()) {
-                idx--;
-                idx = li.erase(idx);
-            }
+        else if(v[mid] > target) {
+            end = mid-1;
         }
         else {
-            li.insert(idx, s[i]);
+            start = mid+1;
+        }
+    }
+    return false;
+}
+
+void solve() {
+    for(int i = 0; i < N; i++) {
+        for(int j = i; j < N; j++) {
+            v.push_back(arr[i] + arr[j]);
         }
     }
 
-    for(auto it : li) {
-        cout << it;
+    sort(arr, arr + N);
+    sort(v.begin(), v.end());
+
+    int sz = v.size() -1;
+
+    for(int i = N-1; i >= 0; i--) {
+        for(int j = i; j >= 0; j--) {
+            int stand = arr[i] - arr[j];
+
+            if(search(stand)) {
+                cout << arr[i];
+                return;
+            }
+        }
     }
-    cout << endl;
 }
 
 void input() {
-    cin >> T;
+    cin >> N;
 
-    while(T--) {
-        cin >> s;
-
-        solve();
+    for(int i = 0; i < N; i++) {
+        cin >> arr[i];
+        um[arr[i]]++;
     }
-}
-
-int main() {
-    ios::sync_with_stdio(0);
-    cin.tie(0), cout.tie(0);
-
-    input();
 }

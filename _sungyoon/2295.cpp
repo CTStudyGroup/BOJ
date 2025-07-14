@@ -7,6 +7,7 @@ typedef long long ll;
 
 int dx[] = {0, 1, -1, 0,1, -1, -1, 1};
 int dy[] = {1, 0, 0, -1, -1, 1, -1, 1};
+
 int N;
 int arr[1001];
 vector<int> v;
@@ -63,12 +64,4 @@ void input() {
         cin >> arr[i];
         um[arr[i]]++;
     }
-}
-
-int main() {
-    ios::sync_with_stdio(0);
-    cin.tie(0), cout.tie(0);
-
-    input();
-    solve();
 }

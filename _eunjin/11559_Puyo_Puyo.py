@@ -1,5 +1,4 @@
 from collections import deque
-import copy
 matrix = [list(input()) for _ in range(12)]
 H = 12
 W = 6
@@ -18,10 +17,8 @@ def print_matrix(mat):
             print(elem, end=" ")
         print()
 
-# 중력 작용, 이동 발생 했으면 True, 발생 안했으면 False 리턴
+# 중력 작용
 def gravity():
-    ret = False
-
     # 아래서부터 확인하면서 자신의 아래칸이 .이면 계속 내리기
     for y in range(10, -1, -1):
         for x in range(6):
@@ -29,8 +26,8 @@ def gravity():
                 continue
 
             curr = matrix[y][x]
-
             ny = y
+
             while ny < H - 1:
                 ny += 1
                 if matrix[ny][x] != ".":
@@ -40,8 +37,7 @@ def gravity():
             if ny != y:  # 이동시켜야 하는 경우
                 matrix[ny][x] = matrix[y][x]
                 matrix[y][x] = "."
-                ret = True
-    return ret
+
 
 def bfs(sy, sx):
     q = deque()
@@ -92,7 +88,7 @@ def explode():
 answer = 0
 
 while True:
-    grav = gravity()
+    gravity()
     visited = [[False] * W for _ in range(H)]
     exp = explode()
 

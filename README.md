@@ -6,13 +6,13 @@
 
 ## 🔸 참여자
 
-| ![](https://avatars.githubusercontent.com/u/114724403?v=4) | ![](https://avatars.githubusercontent.com/u/86961575?v=4) | ![](https://avatars.githubusercontent.com/u/113419425?v=4) |   ![](https://avatars.githubusercontent.com/u/78721630?v=4)   |
-| :--------------------------------------------------------: | :-------------------------------------------------------: | :--------------------------------------------------------: | :-----------------------------------------------------------: |
-| [Eunjin3395](https://github.com/Eunjin3395)<br/>24.09.02 ~ |    [KII1ua](https://github.com/KII1ua)<br/>25.04.01 ~     |   [3veryDay](https://github.com/3veryDay)<br/>25.07.01 ~   | [shoon95](https://github.com/shoon95)<br/>25.07.01 ~ 25.07.24 |
+| ![](https://avatars.githubusercontent.com/u/114724403?v=4) | ![](https://avatars.githubusercontent.com/u/86961575?v=4) | ![](https://avatars.githubusercontent.com/u/113419425?v=4) | ![](https://avatars.githubusercontent.com/u/42308232?v=4) | ![](https://avatars.githubusercontent.com/u/55091003?v=4) |
+| :--------------------------------------------------------: | :-------------------------------------------------------: | :--------------------------------------------------------: | :-------------------------------------------------------: | :-------------------------------------------------------: |
+| [Eunjin3395](https://github.com/Eunjin3395)<br/>24.09.02 ~ |    [KII1ua](https://github.com/KII1ua)<br/>25.04.01 ~     |   [3veryDay](https://github.com/3veryDay)<br/>25.07.01 ~   | [candy0543](https://github.com/candy0543)<br/>25.08.05 ~  | [jaewon-ju](https://github.com/jaewon-ju)<br/>25.08.06 ~  |
 
-|    ![](https://avatars.githubusercontent.com/u/91868155?v=4)    | ![](https://avatars.githubusercontent.com/u/112928885?v=4) |   ![](https://avatars.githubusercontent.com/u/86835751?v=4)   | ![](https://avatars.githubusercontent.com/u/136284855?v=4) |
-| :-------------------------------------------------------------: | :--------------------------------------------------------: | :-----------------------------------------------------------: | :--------------------------------------------------------: |
-| [rimi3226](https://github.com/rimi3226)<br/>24.09.02 ~ 25.06.22 | [kslvy](https://github.com/kslvy)<br/>25.04.01 ~ 25.06.22  | [sgzzong](https://github.com/sgzzong)<br/>25.04.01 ~ 25.04.09 |  [hzee97](https://github.com/hzee97)<br/>24.09.02 ~ 24.12  |
+|   ![](https://avatars.githubusercontent.com/u/78721630?v=4)   |    ![](https://avatars.githubusercontent.com/u/91868155?v=4)    | ![](https://avatars.githubusercontent.com/u/112928885?v=4) |   ![](https://avatars.githubusercontent.com/u/86835751?v=4)   | ![](https://avatars.githubusercontent.com/u/136284855?v=4) |
+| :-----------------------------------------------------------: | :-------------------------------------------------------------: | :--------------------------------------------------------: | :-----------------------------------------------------------: | :--------------------------------------------------------: |
+| [shoon95](https://github.com/shoon95)<br/>25.07.01 ~ 25.07.24 | [rimi3226](https://github.com/rimi3226)<br/>24.09.02 ~ 25.06.22 | [kslvy](https://github.com/kslvy)<br/>25.04.01 ~ 25.06.22  | [sgzzong](https://github.com/sgzzong)<br/>25.04.01 ~ 25.04.09 |  [hzee97](https://github.com/hzee97)<br/>24.09.02 ~ 24.12  |
 
 <br/>
 

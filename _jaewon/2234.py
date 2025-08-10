@@ -13,6 +13,7 @@ for i in range(16):
     binary = bin(i)
     wall[i] = '0' * (4-len(binary[2:])) + binary[2:]
 
+
 dy = [1, 0, -1, 0]
 dx = [0, 1, 0, -1]
 
@@ -34,6 +35,7 @@ def dfs(currentX, currentY, group_num):
             count += dfs(nx, ny, group_num)
     
     return count
+
 
 index = 1
 spaces = []

@@ -45,7 +45,7 @@ jobs:
           case "$PR_AUTHOR" in
             "Eunjin3395") FIELD_NAME="은진" ;;
             "KII1ua") FIELD_NAME="성윤" ;;
-            "candy0543") FIELD_NAME="혜준" ;;
+            "dlchdaud123") FIELD_NAME="총명" ;;
             "jaewon-ju") FIELD_NAME="재원" ;;
             "3veryDay") FIELD_NAME="현서" ;;
             *)

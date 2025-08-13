@@ -6,9 +6,9 @@
 
 ## 🔸 참여자
 
-| ![](https://avatars.githubusercontent.com/u/114724403?v=4) | ![](https://avatars.githubusercontent.com/u/86961575?v=4) | ![](https://avatars.githubusercontent.com/u/113419425?v=4) | ![](https://avatars.githubusercontent.com/u/42308232?v=4) | ![](https://avatars.githubusercontent.com/u/55091003?v=4) |
-| :--------------------------------------------------------: | :-------------------------------------------------------: | :--------------------------------------------------------: | :-------------------------------------------------------: | :-------------------------------------------------------: |
-| [Eunjin3395](https://github.com/Eunjin3395)<br/>24.09.02 ~ |    [KII1ua](https://github.com/KII1ua)<br/>25.04.01 ~     |   [3veryDay](https://github.com/3veryDay)<br/>25.07.01 ~   | [candy0543](https://github.com/candy0543)<br/>25.08.05 ~  | [jaewon-ju](https://github.com/jaewon-ju)<br/>25.08.06 ~  |
+| ![](https://avatars.githubusercontent.com/u/114724403?v=4) | ![](https://avatars.githubusercontent.com/u/86961575?v=4) | ![](https://avatars.githubusercontent.com/u/113419425?v=4) | ![](https://avatars.githubusercontent.com/u/55091003?v=4) |  ![](https://avatars.githubusercontent.com/u/53869165?v=4)   |
+| :--------------------------------------------------------: | :-------------------------------------------------------: | :--------------------------------------------------------: | :-------------------------------------------------------: | :----------------------------------------------------------: |
+| [Eunjin3395](https://github.com/Eunjin3395)<br/>24.09.02 ~ |    [KII1ua](https://github.com/KII1ua)<br/>25.04.01 ~     |   [3veryDay](https://github.com/3veryDay)<br/>25.07.01 ~   | [jaewon-ju](https://github.com/jaewon-ju)<br/>25.08.06 ~  | [dlchdaud123](https://github.com/dlchdaud123)<br/>25.08.14 ~ |
 
 |   ![](https://avatars.githubusercontent.com/u/78721630?v=4)   |    ![](https://avatars.githubusercontent.com/u/91868155?v=4)    | ![](https://avatars.githubusercontent.com/u/112928885?v=4) |   ![](https://avatars.githubusercontent.com/u/86835751?v=4)   | ![](https://avatars.githubusercontent.com/u/136284855?v=4) |
 | :-----------------------------------------------------------: | :-------------------------------------------------------------: | :--------------------------------------------------------: | :-----------------------------------------------------------: | :--------------------------------------------------------: |

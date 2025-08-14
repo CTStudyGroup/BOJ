@@ -1,57 +1,38 @@
 import sys
-input = sys.stdin.readline
+input_data = list(map(int, sys.stdin.read().split()))
 
-# 전위 순회는 노드 위치를 정하는 로직과 동일하다.
-pre = []
-tree = {}
-while True:
-    try:
-        node = int(input())
-        pre.append(node)
-        tree[node] = [-1,-1]
-    except:
-        break
+pre = input_data
+tree = {node: [-1, -1] for node in pre}
 
-root = pre.pop(0)
-
-for element in pre:
-    next = root
-
+root = pre[0]
+for element in pre[1:]:
+    cur = root
     while True:
-        if(element < next):
-            if(tree[next][0] == -1):
-                # 왼쪽이 비어 있다면
-                tree[next][0] = element
+        if element < cur:
+            if tree[cur][0] == -1:
+                tree[cur][0] = element
                 break
-            else:
-                # 왼쪽이 비어있지 않다면
-                next = tree[next][0]
+            cur = tree[cur][0]
         else:
-            if(tree[next][1] == -1):
-                # 오른쪽이 비어 있다면
-                tree[next][1] = element
+            if tree[cur][1] == -1:
+                tree[cur][1] = element
                 break
-            else:
-                # 오른쪽이 비어있지 않다면
-                next = tree[next][1]
+            cur = tree[cur][1]
+            
+# 후위 순회 (스택 1개 + 방문 체크)
+stack = [(root, False)]
+result = []
 
-# 이제 트리를 후위 순회
-# 왼 -> 오 -> 루트
+while stack:
+    node, visited = stack.pop()
+    if node == -1:
+        continue
+    if visited:
+        result.append(str(node))
+    else:
+        # 후위: 왼쪽, 오른쪽, 루트
+        stack.append((node, True))        # 나중에 출력
+        stack.append((tree[node][1], False))  # 오른쪽 먼저 넣어야 왼쪽이 먼저 처리
+        stack.append((tree[node][0], False))  # 왼쪽
 
-def post(node):
-    if(tree[node][0] == -1 and tree[node][1] == -1):
-        print(node)
-        return
-
-    if(tree[node][0] != -1):
-        next = tree[node][0]
-        post(next)
-
-    if(tree[node][1] != -1):
-        next = tree[node][1]
-        post(next)
-
-    print(node)
-
-
-post(root)
+sys.stdout.write("\n".join(result))

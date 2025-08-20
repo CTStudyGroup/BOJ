@@ -1,25 +1,24 @@
-'''
-크기가 N * N 인 체스판
-흰색, 빨간색, 파란색 칸임 
-
-말의 개수는 K
-말은 원판 모양 -> 쌓기 가능
-1~ K까지 번호 있음
-이동 방향은 미리 정해져 있음 (위, 아래, 왼, 오)
-
-시작 : 말 K개를 놓고
-
-턴 1 : 1부터 K까지 이동
-위에 올려져 있는 말도 함께 이동
-
-종료 : 말이 4개 이상 쌓이면 종료
-
-'''
 import sys
 
 d = [[-100, 100], [0, 1], [0, -1], [-1, 0], [1, 0]]
 
+def white_move(y, x, ny, nx, below, upper, turn) :
+    horses_board[y][x] = below  # 아래는 두고
+    horses_board[ny][nx] += upper
+        
+    for new in upper :  # loc 갱신
+        loc[new] = [ny, nx]
+    if len(horses_board[ny][nx]) >= 4: print(turn); sys.exit()
 
+def red_move(y, x, ny, nx, below, upper, turn) :
+    horses_board[y][x] = below
+    horses_board[ny][nx]+= upper[::-1]
+        
+    for new in upper :  # loc 갱신
+        loc[new] = [ny, nx]
+            
+    if len(horses_board[ny][nx]) >= 4: print(turn); sys.exit()
+            
 def blue_move(y, x, dir, num, below, upper,turn) :
     global horses
     # 반대 방향 조회
@@ -30,58 +29,32 @@ def blue_move(y, x, dir, num, below, upper,turn) :
     horses[num] = dir
     ny, nx = y + d[dir][0], x + d[dir][1] 
     if ny < 0 or ny >= N or nx < 0 or nx >= N or board[ny][nx] == 2 :
-
         return
     
     else :
         if board[ny][nx] == 0:        
-            horses_board[y][x] = below  # 아래는 두고
-            horses_board[ny][nx] += upper
-            for new in upper :  # loc 갱신
-                loc[new] = [ny, nx]
+            white_move(y, x, ny, nx, below, upper, turn)
         if board[ny][nx] == 1 :
-            horses_board[y][x] = below
-            horses_board[ny][nx]+= upper[::-1]
-            for new in upper :  # loc 갱신
-                loc[new] = [ny, nx]
-    if len(horses_board[ny][nx]) >= 4: print(turn); sys.exit()
-    
+            red_move(y, x, ny, nx, below, upper, turn)
     
 
 def move(y, x, dir, num, turn) :
     ny, nx = y + d[dir][0], x + d[dir][1]
     tmp = horses_board[y][x]  # 현재 좌표의 말 배열
-    tmp_idx = tmp.index(num)  # 현재 말의 위치 (위에만 이동시켜야 함)
-
-    
+    tmp_idx = tmp.index(num)  # 현재 말의 위치 (위에만 이동시켜야 함)    
     below = tmp[:tmp_idx]
     upper = tmp[tmp_idx :]
     if ny < 0 or ny >= N or nx < 0 or nx >= N or board[ny][nx] == 2 :
         blue_move(y, x, dir, num, below, upper, turn)
     elif board[ny][nx] == 0 :  # 이동하려는 좌표가 흰색
-        horses_board[y][x] = below  # 아래는 두고
-        horses_board[ny][nx] += upper
-        
-        for new in upper :  # loc 갱신
-            loc[new] = [ny, nx]
-        if len(horses_board[ny][nx]) >= 4: print(turn); sys.exit()
-
+        white_move(y, x, ny, nx, below, upper, turn)
     elif board[ny][nx] == 1 :  # 이동하려는 좌표가 빨간색
-        horses_board[y][x] = below
-        horses_board[ny][nx]+= upper[::-1]
-        
-        for new in upper :  # loc 갱신
-            loc[new] = [ny, nx]
+        red_move(y, x, ny, nx, below, upper, turn)
             
-        if len(horses_board[ny][nx]) >= 4: print(turn); sys.exit()
-            
-            
-    
 
 def solve() :
     turn =1
     while turn <= 1000 :
-        
         # 1~ K 말 이동 
         for num in range(1, K+1) :
             y, x = loc[num]  # 현재 위치

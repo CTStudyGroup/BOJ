@@ -1,30 +1,31 @@
-import heapq
 import sys
 
 input = sys.stdin.readline
 
 N, M = map(int, input().split())
-q=[]
 station = []
 for _ in range(N) :
   a = int(input())
-  heapq.heappush(q, (a, a))
   station.append(a)
 station.sort()
 
-print(station)
+left = 0
+right = station[-1]*M
 
-end_time = 0
+def check(time) :
+      cnt = 0 
+      for s in station :
+            if s <= time :
+                  cnt += (time // s)
+      return cnt
+    
+    
+while left < right :
+  mid = (left + right) // 2
 
-for _ in range(M) :
-  cur, cost = heapq.heappop(q)
-  print(cur, cost)
-  end_time = cur
-  heapq.heappush(q, (cur+cost, cost))
-  
-  
-print(end_time)
-
-
-
-
+  if check(mid) >= M : #이 시간안에 끝낼 수 있으면
+    right = mid
+  else :
+    left = mid + 1
+    
+print(left)

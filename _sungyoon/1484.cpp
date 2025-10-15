@@ -49,7 +49,6 @@ void solve() {
 
     for(auto it : v) {
         cout << it << " ";
-	return;
     }
 }
 

@@ -1,4 +1,4 @@
-/** BOJ20061_모노도미노2
+/** BOJ20061_모노미노도미노2
  * # 문제
  * - 게임 규칙
  *  1 빨간 보드에 블록을 두면 회대한 오른쪽(파랑)으로 이동한 한개, 또 최대한 아래쪽(초록)으로 이동한 한개, 총 2개가 생김
@@ -28,7 +28,7 @@
 
 
 import java.io.*;
-public class BOJ20061_모노도미노2 {
+public class BOJ20061_모노미노도미노2 {
     static int score = 0;
     public static void main(String[] args) throws IOException {
         // score 선언

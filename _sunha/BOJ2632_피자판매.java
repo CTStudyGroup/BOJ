@@ -61,10 +61,10 @@ public class BOJ2632_피자판매 {
         prefix_sum(pizza_m, size_cnt_m, M);
         prefix_sum(pizza_n, size_cnt_n, N);
 
-        int result = 0;
+        long result = 0; // 가짓수 구하는 문제는 long이 안전하다고함...
         for (int size = 0; size <= order; size++) {
             if (size_cnt_n[size] > 0) {
-                result += size_cnt_n[size]*size_cnt_m[order-size];
+                result += (long) size_cnt_n[size]*size_cnt_m[order-size];
             }
         }
         System.out.println(result);

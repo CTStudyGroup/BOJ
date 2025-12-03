@@ -1,0 +1,75 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    static List<Integer> A_ALL = new ArrayList<>();
+    static List<Integer> B_ALL = new ArrayList<>();
+    static int answer = 0;
+    static int N;
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        N = Integer.parseInt(br.readLine().trim());
+
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int m = Integer.parseInt(st.nextToken());
+        int n = Integer.parseInt(st.nextToken());
+
+        int[] A = new int[m];
+        for (int i = 0; i < m; i++) A[i] = Integer.parseInt(br.readLine().trim());
+
+        int[] B = new int[n];
+        for (int i = 0; i < n; i++) B[i] = Integer.parseInt(br.readLine().trim());
+
+        makeSums(A, A_ALL);
+        makeSums(B, B_ALL);
+
+        // B 합들의 빈도 맵 (중복 카운트 위해)
+        Map<Integer, Integer> freqB = new HashMap<>();
+        for (int x : B_ALL) freqB.put(x, freqB.getOrDefault(x, 0) + 1);
+
+        // A만으로 N 되는 경우와 B만으로 N 되는 경우는 각각 리스트에서 직접 카운트
+        int countAonly = 0;
+        for (int a : A_ALL) if (a == N) countAonly++;
+        int countBonly = 0;
+        for (int b : B_ALL) if (b == N) countBonly++;
+
+        // A와 B를 합쳐서 N 되는 경우 (A의 각 값에 대해 B에서 N-a 개수 더함)
+        long cross = 0;
+        for (int a : A_ALL) {
+            int need = N - a;
+            if (freqB.containsKey(need)) cross += freqB.get(need);
+        }
+
+        // 하지만 위 cross는 A의 값이 N일 때 (need==0) B의 0이 없으므로 중복 없음.
+        // 최종 답 = A만 + B만 + (A+B 조합)
+        answer = countAonly + countBonly + (int)cross;
+
+        System.out.println(answer);
+    }
+
+    // pizza 배열로부터 가능한 모든 부분합 생성
+    // 규칙: 각 시작점에서 길이 1 ~ len-1 까지의 구간합 추가 (원형)
+    // 마지막에 전체 합(길이 == len) 은 한 번만 추가
+    public static void makeSums(int[] pizza, List<Integer> list) {
+        int len = pizza.length;
+        if (len == 0) return;
+
+        int total = 0;
+        for (int v : pizza) total += v;
+
+        // 길이 1 ~ len-1
+        for (int start = 0; start < len; start++) {
+            int sum = 0;
+            // cnt = 구간 길이
+            for (int cnt = 1; cnt < len; cnt++) {
+                int idx = (start + cnt - 1) % len;
+                sum += pizza[idx];
+                list.add(sum);
+            }
+        }
+
+        // 전체합은 각 피자당 **한 번**만 추가
+        list.add(total);
+    }
+}

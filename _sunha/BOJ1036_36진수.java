@@ -106,7 +106,7 @@ import java.io.*;
 import java.util.*;
 import java.math.*;
 
-public class BOJ_36진수 {
+public class BOJ1036_36진수 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N, K;

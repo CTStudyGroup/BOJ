@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class BOJ16235_나무재태크 {
     static int N,M,K;
     static int[][] A, land;
     static Deque<Tree> trees;

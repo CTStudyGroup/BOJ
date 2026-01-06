@@ -1,0 +1,120 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    static int N, M, K;
+    static int[][] map;
+    static boolean[][] visited;
+
+    // 동 남 서 북
+    static int[] dr = {0, 1, 0, -1};
+    static int[] dc = {1, 0, -1, 0};
+
+    static int dir = 0;
+    static int r = 0, c = 0;
+    static int score = 0;
+
+    static int[] dice = {1, 6, 2, 5, 4, 3};
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
+        K = Integer.parseInt(st.nextToken());
+
+        map = new int[N][M];
+        for (int i = 0; i < N; i++) {
+            st = new StringTokenizer(br.readLine());
+            for (int j = 0; j < M; j++) {
+                map[i][j] = Integer.parseInt(st.nextToken());
+            }
+        }
+
+        for (int i = 0; i < K; i++) {
+            move();
+            score += bfs(r, c);
+            rotateDir();
+        }
+
+        System.out.println(score);
+    }
+
+    static void move() {
+        int nr = r + dr[dir];
+        int nc = c + dc[dir];
+
+        if (nr < 0 || nc < 0 || nr >= N || nc >= M) {
+            dir = (dir + 2) % 4;
+            nr = r + dr[dir];
+            nc = c + dc[dir];
+        }
+
+        roll();
+        r = nr;
+        c = nc;
+    }
+
+    static void roll() {
+        int[] temp = dice.clone();
+
+        if (dir == 0) { // 동
+            dice[0] = temp[4];
+            dice[1] = temp[5];
+            dice[4] = temp[1];
+            dice[5] = temp[0];
+        } else if (dir == 1) { // 남
+            dice[0] = temp[2];
+            dice[1] = temp[3];
+            dice[2] = temp[1];
+            dice[3] = temp[0];
+        } else if (dir == 2) { // 서
+            dice[0] = temp[5];
+            dice[1] = temp[4];
+            dice[4] = temp[0];
+            dice[5] = temp[1];
+        } else { // 북
+            dice[0] = temp[3];
+            dice[1] = temp[2];
+            dice[2] = temp[0];
+            dice[3] = temp[1];
+        }
+    }
+
+    static int bfs(int x, int y) {
+        visited = new boolean[N][M];
+        Queue<int[]> q = new LinkedList<>();
+        q.offer(new int[]{x, y});
+        visited[x][y] = true;
+
+        int cnt = 1;
+        int val = map[x][y];
+
+        while (!q.isEmpty()) {
+            int[] cur = q.poll();
+            for (int d = 0; d < 4; d++) {
+                int nx = cur[0] + dr[d];
+                int ny = cur[1] + dc[d];
+
+                if (nx < 0 || ny < 0 || nx >= N || ny >= M) continue;
+                if (visited[nx][ny]) continue;
+                if (map[nx][ny] != val) continue;
+
+                visited[nx][ny] = true;
+                cnt++;
+                q.offer(new int[]{nx, ny});
+            }
+        }
+        return cnt * val;
+    }
+
+    static void rotateDir() {
+        int A = dice[1];
+        int B = map[r][c];
+
+        if (A > B) dir = (dir + 1) % 4;
+        else if (A < B) dir = (dir + 3) % 4;
+    }
+}

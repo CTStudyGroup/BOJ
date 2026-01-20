@@ -25,7 +25,7 @@ import java.io.*;
 
 public class BOJ1103_게임 {
 
-    static int N, M, result=0;
+    static int N, M;
     static int[][] board, visited, dp, ofs = {{-1,0}, {1,0}, {0,-1}, {0,1}};
 
     public static void main(String[] args) throws IOException {
@@ -48,10 +48,10 @@ public class BOJ1103_게임 {
 
         // for -> visit 하지 않은 노드라면 탐색 시작
         visited[0][0] = 1;
-        System.out.println(dfs(0, 0, 1));
+        System.out.println(dfs(0, 0));
     }
 
-    static int dfs(int n, int m, int dpt) {
+    static int dfs(int n, int m) {
         dp[n][m] = 1;
 
         for (int[] o: ofs){
@@ -70,7 +70,7 @@ public class BOJ1103_게임 {
                     // 저장된 값 없음
                     if (dp[nn][nm] == 0) {
                         visited[nn][nm] = 1;
-                        int result = dfs(nn, nm, dpt + 1);
+                        int result = dfs(nn, nm);
 
                         if (result == -1) return -1;
                         dp[n][m] = Math.max(dp[n][m], result + 1);  // nn,nm에서 출발한 모든 경우를 탐색하기 때문에, 최대 값이 보장됨.
@@ -92,7 +92,7 @@ public class BOJ1103_게임 {
         if (n>=N) return false;
         if (m>=M) return false;
 
-        return board[n][m] != 24;
+        return board[n][m] != 24;   //H
     }
 
 }

@@ -57,13 +57,13 @@ public class BOJ22856_트리순회 {
             cnt++;
         }
 
-        if (now == endNode) {
-            System.out.println(cnt - 1); // 시작점 카운트(1) 제외하고 출력
-        }
-
         if (tree[now].right > 0) {
             travel(tree[now].right);
             cnt++;
+        }
+
+        if (now == endNode) {
+            System.out.println(cnt - 1); // 시작점 카운트(1) 제외하고 출력
         }
 
     }
